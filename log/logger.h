@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 namespace rlog {
 
 class Logger {
@@ -8,11 +11,23 @@ public:
   static Logger *GetInstance();
 
   // Add API to delete singleton? For lifecycle management.
-  
+
+  /* APIs */
+  void Write(std::string logstr);
+
 private:
   // Private constructor to prevent non singleton creation.
   Logger();
   ~Logger();
+
+  // Format the string.
+  std::string Format(std::string str);
+
+  // Flush the logs that are in memory to disk.
+  void Flush();
+
+private:
+  std::vector<std::string> logs_;
 
 private:
   // Delete the copy and assignment constructors.
