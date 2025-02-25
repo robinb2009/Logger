@@ -8,6 +8,12 @@ cc_library(
     hdrs = ["logger.h"],
 )
 
+cc_library(
+    name = "log_record",
+    srcs = ["log_record.cc"],
+    hdrs = ["log_record.h"],
+)
+
 cc_test(
     name = "test",
     srcs = ["test.cc"],
