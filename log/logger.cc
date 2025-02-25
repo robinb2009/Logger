@@ -1,6 +1,8 @@
 #include "log/logger.h"
 
+#include <cassert>
 #include <iostream>
+#include <mutex>
 
 using std::cout;
 using std::endl;
@@ -28,6 +30,7 @@ Logger::~Logger() { cout << "Destroyed Logger!" << endl; }
 //-----------------------------------------------------------------------------
 
 void Logger::Write(string logstr) {
+  std::unique_lock<std::shared_mutex> ul(mutex_);
   logs_.push_back(Format(logstr));
 
   if (logs_.size() >= LOG_FLUSH_THRESHOLD) {
@@ -45,11 +48,13 @@ string Logger::Format(string str) {
 //-----------------------------------------------------------------------------
 
 void Logger::Flush() {
-    for (auto& str : logs_) {
-        cout << str;
-    }
-    cout << std::flush;
-    logs_.clear();
+  assert(!mutex_.try_lock_shared());
+
+  for (auto &str : logs_) {
+    cout << str;
+  }
+  cout << std::flush;
+  logs_.clear();
 }
 
 //-----------------------------------------------------------------------------

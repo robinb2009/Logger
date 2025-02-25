@@ -1,5 +1,6 @@
 #pragma once
 
+#include <shared_mutex>
 #include <string>
 #include <vector>
 
@@ -27,6 +28,10 @@ private:
   void Flush();
 
 private:
+  // Shared mutex to lock logs_.
+  std::shared_mutex mutex_;
+
+  // Logs stored in memory before flushing.
   std::vector<std::string> logs_;
 
 private:
