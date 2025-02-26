@@ -31,18 +31,11 @@ Logger::~Logger() { cout << "Destroyed Logger!" << endl; }
 
 void Logger::Write(string logstr) {
   std::unique_lock<std::shared_mutex> ul(mutex_);
-  logs_.push_back(Format(logstr));
+  logs_.push_back(move(logstr));
 
   if (logs_.size() >= LOG_FLUSH_THRESHOLD) {
     Flush();
   }
-}
-
-//-----------------------------------------------------------------------------
-
-string Logger::Format(string str) {
-  string ret = "INFO DATE " + str + "\n";
-  return ret;
 }
 
 //-----------------------------------------------------------------------------

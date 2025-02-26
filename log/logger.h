@@ -21,9 +21,6 @@ private:
   Logger();
   ~Logger();
 
-  // Format the string.
-  std::string Format(std::string str);
-
   // Flush the logs that are in memory to disk.
   void Flush();
 
