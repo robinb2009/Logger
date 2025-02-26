@@ -21,6 +21,9 @@ public:
   // Add API to delete singleton? For lifecycle management.
 
   /* APIs */
+
+  // TODO: Consider converting to Write(LogRecord). 
+  // We may want the ability to switch up how we format and persist data.
   void Write(std::string logstr);
 
 private:
