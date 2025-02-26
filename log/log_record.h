@@ -1,3 +1,7 @@
+// LogRecord class.
+//
+// This class represents a log record. 
+
 #pragma once
 
 #include <string>
@@ -12,6 +16,8 @@ enum class LogLevel {
   ERROR,
   FATAL,
 };
+
+// TODO: Add a builder class for LogRecord.
 
 class LogRecord {
 public:

@@ -1,3 +1,10 @@
+// Logger class. 
+//
+// Today logger class is independent of actual LogCaptor and LogRecord implementation.
+// It just deals with strings. We may need to integrate in the future to indicate whether 
+// to crash when receiving a FATAL log.
+
+
 #pragma once
 
 #include <shared_mutex>

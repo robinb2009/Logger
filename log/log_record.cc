@@ -12,7 +12,12 @@ namespace rlog {
 LogRecord::LogRecord(string data, LogLevel level, string file_name,
                      int line_num, string time)
     : data_(move(data)), level_(level), file_name_(move(file_name)),
-      line_num_(line_num), time_(move(time)) {}
+      line_num_(line_num), time_(move(time)) {
+    // TODO: Convert '10000' to a constant.
+    //
+    // Limit the actual log size.
+    assert(data_.size() < 10000);
+}
 
 //-----------------------------------------------------------------------------
 
